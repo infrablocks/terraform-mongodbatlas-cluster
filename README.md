@@ -1,11 +1,14 @@
-Terraform MongoDB Atlas Project
+Terraform MongoDB Atlas Cluster
 ===============================
 
-[![CircleCI](https://circleci.com/gh/infrablocks/terraform-mongodbatlas-project.svg?style=svg)](https://circleci.com/gh/infrablocks/terraform-mongodbatlas-project)
+[![CircleCI](https://circleci.com/gh/infrablocks/terraform-mongodbatlas-cluster.svg?style=svg)](https://circleci.com/gh/infrablocks/terraform-mongodbatlas-cluster)
 
-A Terraform module for creating a project in a MongoDB Atlas organisation.
+A Terraform module for creating a MongoDB cluster in MongoDB Atlas.
 
-The MongoDB Atlas project consists of:
+The MongoDB cluster requires:
+* An existing project within a MongoDB organisation
+
+The MongoDB cluster consists of:
 * TODO
 
 Usage
@@ -15,12 +18,18 @@ To use the module, include something like the following in your terraform
 configuration:
 
 ```hcl-terraform
-module "mongodbatlas_project" {
-  source  = "infrablocks/project/mongodbatlas"
+module "mongodbatlas_cluster" {
+  source  = "infrablocks/cluster/mongodbatlas"
   version = "0.1.0"
 }
 ```
 
+As mentioned above, the cluster deploys into an existing project. 
+Whilst the project can be created using any mechanism you like, the 
+[MongoDB Atlas Project](https://github.com/infrablocks/terraform-mongodbatlas-project)
+module will create everything you need. See the 
+[docs](https://github.com/infrablocks/terraform-mongodbatlas-project/blob/master/README.md)
+for usage instructions.
 
 ### Inputs
 
@@ -145,7 +154,7 @@ Contributing
 ------------
 
 Bug reports and pull requests are welcome on GitHub at 
-https://github.com/infrablocks/terraform-mongodbatlas-project. 
+https://github.com/infrablocks/terraform-mongodbatlas-cluster. 
 This project is intended to be a safe, welcoming space for collaboration, and 
 contributors are expected to adhere to the 
 [Contributor Covenant](http://contributor-covenant.org) code of conduct.

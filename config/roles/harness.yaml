@@ -11,3 +11,5 @@ vars:
   provider_name: "%{hiera('provider_name')}"
   provider_region_name: "%{hiera('provider_region_name')}"
   provider_instance_size: "%{hiera('provider_instance_size')}"
+
+  database_users: "%{hiera('database_users')}"

@@ -19,4 +19,6 @@ module "cluster" {
   provider_name = var.provider_name
   provider_region_name = var.provider_region_name
   provider_instance_size = var.provider_instance_size
+
+  database_users = var.database_users
 }

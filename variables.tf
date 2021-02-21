@@ -32,3 +32,18 @@ variable "provider_instance_size" {
   type = string
   description = "The instance size to use for the cluster. Provider specific, see https://docs.atlas.mongodb.com/reference for details."
 }
+
+variable "database_users" {
+  type = list(object({
+    username: string,
+    password: string,
+    roles: list(object({
+      role_name: string,
+      database_name: string,
+      collection_name: string
+    })),
+    labels: map(string)
+  }))
+  description = "A list of database users to create for the cluster"
+  default     = []
+}

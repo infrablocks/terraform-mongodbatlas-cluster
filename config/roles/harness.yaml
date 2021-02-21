@@ -5,3 +5,9 @@ state_file: "%{hiera('project_directory')}/state/harness.tfstate"
 vars:
   component: "%{hiera('component')}"
   deployment_identifier: "%{hiera('deployment_identifier')}"
+
+  cluster_type: "%{hiera('cluster_type')}"
+
+  provider_name: "%{hiera('provider_name')}"
+  provider_region_name: "%{hiera('provider_region_name')}"
+  provider_instance_size: "%{hiera('provider_instance_size')}"

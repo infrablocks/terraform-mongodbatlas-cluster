@@ -4,3 +4,11 @@ deployment_identifier: "%{hiera('deployment_identifier')}"
 
 work_directory: 'build'
 configuration_directory: "%{hiera('work_directory')}/%{hiera('source_directory')}"
+
+organization_id: "602e67f467852d083d43a50f"
+
+cluster_type: "REPLICASET"
+
+provider_name: 'AWS'
+provider_region_name: 'EU_WEST_1'
+provider_instance_size: 'M10'

@@ -11,19 +11,33 @@ resource "mongodbatlas_cluster" "cluster" {
 
   cluster_type = var.cluster_type
 
-  provider_name               = var.provider_name
-  provider_region_name        = var.provider_region_name
-  provider_instance_size_name = var.provider_instance_size
+  mongo_db_major_version = var.mongo_db_major_version
+
+  disk_size_gb = var.disk_size_gb
+
+  auto_scaling_disk_gb_enabled            = var.auto_scaling.disk_gb.enabled
+  auto_scaling_compute_enabled            = var.auto_scaling.compute.enabled
+  auto_scaling_compute_scale_down_enabled = var.auto_scaling.compute.scale_down_enabled
+
+  provider_name                                   = var.cloud_provider.name
+  provider_region_name                            = var.cloud_provider.region_name
+  provider_instance_size_name                     = var.cloud_provider.instance_size_name
+  provider_auto_scaling_compute_min_instance_size = var.cloud_provider.auto_scaling.compute.min_instance_size
+  provider_auto_scaling_compute_max_instance_size = var.cloud_provider.auto_scaling.compute.max_instance_size
 
   replication_specs {
     num_shards = 1
 
     regions_config {
-      region_name     = var.provider_region_name
+      region_name     = var.cloud_provider.region_name
       electable_nodes = 3
       priority        = 7
     }
   }
+
+  // TODO: we need to ignore changes of provider_instance_size_name when compute
+  //       auto scaling is enabled but not when it's not; terraform is yet to
+  //       support this https://github.com/hashicorp/terraform/issues/3116
 }
 
 resource "mongodbatlas_database_user" "user" {

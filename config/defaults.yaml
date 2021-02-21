@@ -9,9 +9,25 @@ organization_id: "602e67f467852d083d43a50f"
 
 cluster_type: "REPLICASET"
 
-provider_name: 'AWS'
-provider_region_name: 'EU_WEST_1'
-provider_instance_size: 'M10'
+mongo_db_major_version: "4.0"
+
+disk_size_gb: 60
+
+auto_scaling:
+  disk_gb:
+    enabled: true
+  compute:
+    enabled: true
+    scale_down_enabled: true
+
+cloud_provider:
+  name: "AWS"
+  region_name: "EU_WEST_1"
+  instance_size_name: "M10"
+  auto_scaling:
+    compute:
+      min_instance_size: "M10"
+      max_instance_size: "M30"
 
 database_users:
   - username: "user-1"

@@ -18,19 +18,53 @@ variable "cluster_type" {
   default = "REPLICASET"
 }
 
-variable "provider_name" {
+variable "mongo_db_major_version" {
   type = string
-  description = "The provider to use for the cluster. One of [\"AWS\", \"GCP\", \"AZURE\", \"TENANT\"]."
+  description = "The version of MongoDB to deploy to the cluster. One of [\"3.6\", \"4.0\", \"4.2\", \"4.4\"]. If provider_instance_size is \"M2\" or \"M5\", this must be \"4.4\"."
+  default = "4.4"
 }
 
-variable "provider_region_name" {
-  type = string
-  description = "The Atlas region of the provider in which the cluster should be created. Provider specific, see https://docs.atlas.mongodb.com/reference for details."
+variable "disk_size_gb" {
+  type = number
+  description = "The capacity, in GB, of each cluster instance host's root volume. AWS / GCP only."
+  default = null
 }
 
-variable "provider_instance_size" {
-  type = string
-  description = "The instance size to use for the cluster. Provider specific, see https://docs.atlas.mongodb.com/reference for details."
+variable "auto_scaling" {
+  type = object({
+    disk_gb: object({
+      enabled: bool
+    }),
+    compute: object({
+      enabled: bool,
+      scale_down_enabled: bool
+    })
+  })
+  description = "Auto-scaling configuration for the cluster."
+  default = {
+    disk_gb: {
+      enabled: true,
+    },
+    compute: {
+      enabled: false,
+      scale_down_enabled: false
+    }
+  }
+}
+
+variable "cloud_provider" {
+  type = object({
+    name: string,
+    region_name: string,
+    instance_size_name: string
+    auto_scaling = object({
+      compute: object({
+        min_instance_size: string,
+        max_instance_size: string,
+      })
+    })
+  })
+  description = "Cloud provider configuration for the cluster."
 }
 
 variable "database_users" {

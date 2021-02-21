@@ -3,9 +3,35 @@ variable "deployment_identifier" {}
 
 variable "cluster_type" {}
 
-variable "provider_name" {}
-variable "provider_region_name" {}
-variable "provider_instance_size" {}
+variable "mongo_db_major_version" {}
+
+variable "disk_size_gb" {}
+
+variable "auto_scaling" {
+  type = object({
+    disk_gb: object({
+      enabled: bool
+    }),
+    compute: object({
+      enabled: bool,
+      scale_down_enabled: bool
+    })
+  })
+}
+
+variable "cloud_provider" {
+  type = object({
+    name: string,
+    region_name: string,
+    instance_size_name: string
+    auto_scaling = object({
+      compute: object({
+        min_instance_size: string,
+        max_instance_size: string,
+      })
+    })
+  })
+}
 
 variable "database_users" {
   type = list(object({

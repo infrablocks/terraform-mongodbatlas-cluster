@@ -8,8 +8,11 @@ vars:
 
   cluster_type: "%{hiera('cluster_type')}"
 
-  provider_name: "%{hiera('provider_name')}"
-  provider_region_name: "%{hiera('provider_region_name')}"
-  provider_instance_size: "%{hiera('provider_instance_size')}"
+  mongo_db_major_version: "%{hiera('mongo_db_major_version')}"
+
+  disk_size_gb: "%{hiera('disk_size_gb')}"
+
+  auto_scaling: "%{hiera('auto_scaling')}"
+  cloud_provider: "%{hiera('cloud_provider')}"
 
   database_users: "%{hiera('database_users')}"

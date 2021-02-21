@@ -16,9 +16,11 @@ module "cluster" {
 
   cluster_type = var.cluster_type
 
-  provider_name = var.provider_name
-  provider_region_name = var.provider_region_name
-  provider_instance_size = var.provider_instance_size
+  mongo_db_major_version = var.mongo_db_major_version
 
+  disk_size_gb = var.disk_size_gb
+
+  auto_scaling = var.auto_scaling
+  cloud_provider = var.cloud_provider
   database_users = var.database_users
 }

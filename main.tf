@@ -30,7 +30,7 @@ resource "mongodbatlas_cluster" "cluster" {
   provider_auto_scaling_compute_max_instance_size = var.cloud_provider.auto_scaling.compute.max_instance_size
 
   replication_specs {
-    num_shards = 1
+    num_shards = var.number_of_shards
 
     regions_config {
       region_name     = var.cloud_provider.region_name

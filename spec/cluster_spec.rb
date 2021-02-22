@@ -12,6 +12,8 @@ describe 'Cluster' do
 
   let(:disk_size_gb) { vars.disk_size_gb.to_i }
 
+  let(:number_of_shards) { vars.number_of_shards.to_i }
+
   let(:auto_scaling) { vars.auto_scaling }
 
   context "on AWS" do
@@ -57,6 +59,11 @@ describe 'Cluster' do
 
       it 'uses the disk size in gigabytes' do
         expect(cluster["diskSizeGB"]).to(eq(disk_size_gb))
+      end
+
+      it 'uses the specified number of shards' do
+        expect(cluster["replicationSpecs"][0]["numShards"])
+            .to(eq(number_of_shards))
       end
 
       it 'uses the specified auto-scaling configuration' do

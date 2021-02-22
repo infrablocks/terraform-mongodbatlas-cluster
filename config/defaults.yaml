@@ -13,6 +13,8 @@ mongo_db_major_version: "4.0"
 
 disk_size_gb: 60
 
+number_of_shards: 1
+
 auto_scaling:
   disk_gb:
     enabled: true

@@ -30,6 +30,12 @@ variable "disk_size_gb" {
   default = null
 }
 
+variable "number_of_shards" {
+  type = number
+  description = "The number of shards in the cluster."
+  default = 1
+}
+
 variable "auto_scaling" {
   type = object({
     disk_gb: object({

@@ -20,6 +20,8 @@ module "cluster" {
 
   disk_size_gb = var.disk_size_gb
 
+  number_of_shards = var.number_of_shards
+
   auto_scaling = var.auto_scaling
   cloud_provider = var.cloud_provider
   database_users = var.database_users

@@ -12,6 +12,8 @@ vars:
 
   disk_size_gb: "%{hiera('disk_size_gb')}"
 
+  number_of_shards: "%{hiera('number_of_shards')}"
+
   auto_scaling: "%{hiera('auto_scaling')}"
   cloud_provider: "%{hiera('cloud_provider')}"
 

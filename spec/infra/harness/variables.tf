@@ -7,6 +7,8 @@ variable "mongo_db_major_version" {}
 
 variable "disk_size_gb" {}
 
+variable "number_of_shards" {}
+
 variable "auto_scaling" {
   type = object({
     disk_gb: object({

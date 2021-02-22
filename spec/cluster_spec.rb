@@ -14,8 +14,6 @@ describe 'Cluster' do
 
   let(:auto_scaling) { vars.auto_scaling }
 
-  let(:provider) { vars.provider }
-
   context "on AWS" do
     context "for dedicated single cloud single region clusters" do
       before(:all) do
@@ -24,6 +22,10 @@ describe 'Cluster' do
                 name: "AWS",
                 region_name: "EU_WEST_1",
                 instance_size_name: "M10",
+                disk_iops: 180,
+                volume_type: "STANDARD",
+                backup_enabled: true,
+                encrypt_ebs_volume: false,
                 auto_scaling: {
                     compute: {
                         min_instance_size: "M10",
@@ -81,6 +83,25 @@ describe 'Cluster' do
 
         expect(auto_scaling_settings["minInstanceSize"]).to(eq("M10"))
         expect(auto_scaling_settings["maxInstanceSize"]).to(eq("M30"))
+      end
+
+      it 'uses the specified provider disk iops' do
+        expect(cluster["providerSettings"]["diskIOPS"]).to(eq(180))
+      end
+
+      it 'uses the specified provider volume type' do
+        expect(cluster["providerSettings"]["volumeType"]).to(eq("STANDARD"))
+      end
+
+      it 'uses the specified flag for whether or not provider EBS volume ' +
+          'is encrypted' do
+        expect(cluster["providerSettings"]["encryptEBSVolume"])
+            .to(eq(false))
+      end
+
+      it 'uses the specified flag for whether or not provider backups ' +
+          'are enabled' do
+        expect(cluster["providerBackupEnabled"]).to(eq(true))
       end
     end
   end

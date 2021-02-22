@@ -57,6 +57,10 @@ variable "cloud_provider" {
     name: string,
     region_name: string,
     instance_size_name: string
+    disk_iops: number,
+    volume_type: string,
+    backup_enabled: bool,
+    encrypt_ebs_volume: bool,
     auto_scaling = object({
       compute: object({
         min_instance_size: string,

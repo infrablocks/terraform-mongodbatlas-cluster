@@ -22,6 +22,10 @@ resource "mongodbatlas_cluster" "cluster" {
   provider_name                                   = var.cloud_provider.name
   provider_region_name                            = var.cloud_provider.region_name
   provider_instance_size_name                     = var.cloud_provider.instance_size_name
+  provider_disk_iops                              = var.cloud_provider.disk_iops
+  provider_volume_type                            = var.cloud_provider.volume_type
+  provider_backup_enabled                         = var.cloud_provider.backup_enabled
+  provider_encrypt_ebs_volume                     = var.cloud_provider.encrypt_ebs_volume
   provider_auto_scaling_compute_min_instance_size = var.cloud_provider.auto_scaling.compute.min_instance_size
   provider_auto_scaling_compute_max_instance_size = var.cloud_provider.auto_scaling.compute.max_instance_size
 

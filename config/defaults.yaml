@@ -24,6 +24,10 @@ cloud_provider:
   name: "AWS"
   region_name: "EU_WEST_1"
   instance_size_name: "M10"
+  disk_iops: 180
+  volume_type: "STANDARD"
+  backup_enabled: true
+  encrypt_ebs_volume: false
   auto_scaling:
     compute:
       min_instance_size: "M10"

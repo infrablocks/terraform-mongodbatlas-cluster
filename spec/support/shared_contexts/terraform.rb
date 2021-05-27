@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'awspec'
 require 'ostruct'
 
 require_relative '../terraform_module'

@@ -6,7 +6,7 @@ describe 'Users' do
 
   let(:database_users) { vars.database_users }
 
-  let(:project_id) { output_for(:prerequisites, "project_id", parse: true) }
+  let(:project_id) { output_for(:prerequisites, "project_id") }
 
   it 'creates the requested database users' do
     database_users.each do |database_user|

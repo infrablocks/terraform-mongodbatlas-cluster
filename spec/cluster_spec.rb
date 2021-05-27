@@ -4,7 +4,7 @@ describe 'Cluster' do
   let(:component) { vars.component }
   let(:deployment_identifier) { vars.deployment_identifier }
 
-  let(:project_id) { output_for(:prerequisites, "project_id", parse: true) }
+  let(:project_id) { output_for(:prerequisites, "project_id") }
 
   let(:cluster_type) { vars.cluster_type }
 

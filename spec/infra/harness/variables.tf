@@ -29,7 +29,6 @@ variable "cloud_provider" {
     disk_iops: number,
     volume_type: string,
     backup_enabled: bool,
-    encrypt_ebs_volume: bool,
     auto_scaling = object({
       compute: object({
         min_instance_size: string,

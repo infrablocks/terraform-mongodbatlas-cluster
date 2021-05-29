@@ -24,10 +24,9 @@ describe 'Cluster' do
                 name: "AWS",
                 region_name: "EU_WEST_1",
                 instance_size_name: "M10",
-                disk_iops: 180,
+                disk_iops: 4000,
                 volume_type: "STANDARD",
                 backup_enabled: true,
-                encrypt_ebs_volume: false,
                 auto_scaling: {
                     compute: {
                         min_instance_size: "M10",
@@ -93,17 +92,11 @@ describe 'Cluster' do
       end
 
       it 'uses the specified provider disk iops' do
-        expect(cluster["providerSettings"]["diskIOPS"]).to(eq(180))
+        expect(cluster["providerSettings"]["diskIOPS"]).to(eq(4000))
       end
 
       it 'uses the specified provider volume type' do
         expect(cluster["providerSettings"]["volumeType"]).to(eq("STANDARD"))
-      end
-
-      it 'uses the specified flag for whether or not provider EBS volume ' +
-          'is encrypted' do
-        expect(cluster["providerSettings"]["encryptEBSVolume"])
-            .to(eq(false))
       end
 
       it 'uses the specified flag for whether or not provider backups ' +

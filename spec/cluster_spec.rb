@@ -23,7 +23,7 @@ describe 'Cluster' do
             provider: {
                 name: "AWS",
                 region_name: "EU_WEST_1",
-                instance_size_name: "M10",
+                instance_size_name: "M30",
                 disk_iops: 4000,
                 volume_type: "STANDARD",
                 backup_enabled: true,
@@ -80,7 +80,7 @@ describe 'Cluster' do
       end
 
       it 'uses the specified provider instance size' do
-        expect(cluster["providerSettings"]["instanceSizeName"]).to(eq('M10'))
+        expect(cluster["providerSettings"]["instanceSizeName"]).to(eq('M30'))
       end
 
       it 'uses the specified provider auto scaling configuration' do

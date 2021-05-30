@@ -24,7 +24,9 @@ describe 'Cluster' do
                 name: "AWS",
                 region_name: "EU_WEST_1",
                 instance_size_name: "M30",
-                disk_iops: 4000,
+                # TODO: this is effectively useless as we haven't passed the
+                # storage type as provisioned
+                disk_iops: 3000,
                 volume_type: "STANDARD",
                 backup_enabled: true,
                 auto_scaling: {
@@ -92,7 +94,7 @@ describe 'Cluster' do
       end
 
       it 'uses the specified provider disk iops' do
-        expect(cluster["providerSettings"]["diskIOPS"]).to(eq(4000))
+        expect(cluster["providerSettings"]["diskIOPS"]).to(eq(3000))
       end
 
       it 'uses the specified provider volume type' do

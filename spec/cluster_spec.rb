@@ -19,8 +19,8 @@ describe 'Cluster' do
   context "on AWS" do
     context "for dedicated single cloud single region clusters" do
       before(:all) do
-        reprovision(
-            provider: {
+        provision(
+          cloud_provider: {
                 name: "AWS",
                 region_name: "EU_WEST_1",
                 instance_size_name: "M30",

@@ -29,8 +29,8 @@ describe 'Cluster' do
                 backup_enabled: true,
                 auto_scaling: {
                     compute: {
-                        min_instance_size: "M10",
-                        max_instance_size: "M30"
+                        min_instance_size: "M30",
+                        max_instance_size: "M40"
                     }
                 }
             })
@@ -87,8 +87,8 @@ describe 'Cluster' do
         auto_scaling_settings =
             cluster["providerSettings"]["autoScaling"]["compute"]
 
-        expect(auto_scaling_settings["minInstanceSize"]).to(eq("M10"))
-        expect(auto_scaling_settings["maxInstanceSize"]).to(eq("M30"))
+        expect(auto_scaling_settings["minInstanceSize"]).to(eq("M30"))
+        expect(auto_scaling_settings["maxInstanceSize"]).to(eq("M40"))
       end
 
       it 'uses the specified provider disk iops' do

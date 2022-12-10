@@ -1,7 +1,7 @@
 locals {
-  database_users = {
-  for database_user in var.database_users:
-  database_user.username => database_user
+  database_users_map = {
+    for database_user in local.database_users:
+      database_user.username => database_user
   }
 }
 
@@ -9,15 +9,15 @@ resource "mongodbatlas_cluster" "cluster" {
   project_id = var.project_id
   name       = "${var.component}-${var.deployment_identifier}"
 
-  cluster_type = var.cluster_type
+  cluster_type = local.cluster_type
 
-  mongo_db_major_version = var.mongo_db_major_version
+  mongo_db_major_version = local.mongo_db_major_version
 
   disk_size_gb = var.disk_size_gb
 
-  auto_scaling_disk_gb_enabled            = var.auto_scaling.disk_gb.enabled
-  auto_scaling_compute_enabled            = var.auto_scaling.compute.enabled
-  auto_scaling_compute_scale_down_enabled = var.auto_scaling.compute.scale_down_enabled
+  auto_scaling_disk_gb_enabled            = local.auto_scaling.disk_gb.enabled
+  auto_scaling_compute_enabled            = local.auto_scaling.compute.enabled
+  auto_scaling_compute_scale_down_enabled = local.auto_scaling.compute.scale_down_enabled
 
   provider_name                                   = var.cloud_provider.name
   provider_region_name                            = var.cloud_provider.region_name
@@ -29,7 +29,7 @@ resource "mongodbatlas_cluster" "cluster" {
   provider_auto_scaling_compute_max_instance_size = var.cloud_provider.auto_scaling.compute.max_instance_size
 
   replication_specs {
-    num_shards = var.number_of_shards
+    num_shards = local.number_of_shards
 
     regions_config {
       region_name     = var.cloud_provider.region_name
@@ -44,7 +44,7 @@ resource "mongodbatlas_cluster" "cluster" {
 }
 
 resource "mongodbatlas_database_user" "user" {
-  for_each = local.database_users
+  for_each = local.database_users_map
 
   project_id         = var.project_id
   username           = each.key
@@ -62,7 +62,7 @@ resource "mongodbatlas_database_user" "user" {
   }
 
   dynamic "labels" {
-    for_each = merge(local.labels, each.value.labels)
+    for_each = merge(local.resolved_labels, each.value.labels)
     content {
       key   = labels.key
       value = labels.value
